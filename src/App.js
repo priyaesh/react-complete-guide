@@ -16,16 +16,13 @@ class App extends Component {
 
   }
 
-  swithNameHandler=(newName)=>{
-    //console.log("was clicked");
-    this.setState({
-      person: [
-        {name:newName,age:5},
-        {name:'Moulesh',age:2.5},
-        {name:'Eswar',age:35}
-        
-      ]
-    })
+  
+
+  deletePersonHandler = (personIndex) =>{
+    const persons=this.state.persons;
+    persons.splice(personIndex,1)
+    this.setState({persons:persons});
+
   }
   nameChangeHandler=(event)=>{
     this.setState({
@@ -59,14 +56,16 @@ class App extends Component {
       if(this.state.showPerson){
         persons=(
         <div>
-          {this.state.person.map(person=>{
+          {this.state.person.map((person, index)=>{
             return <Person  
+                    onClick={()=>this.deletePersonHandler(this,index)}
                     name={person.name}
                     age={person.age} />
                     
+                    
           })}
          
-          </div>
+         </div>
 
         );
       }
