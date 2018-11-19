@@ -11,7 +11,9 @@ class App extends Component {
       {name:'Eswar',age:36}
       
     ],
-    otherState:'some other value'
+    otherState:'some other value',
+    showPerson:false
+
   }
 
   swithNameHandler=(newName)=>{
@@ -36,6 +38,12 @@ class App extends Component {
     })
   }
 
+  togglePersonHandler=()=>{
+    const doesShow=this.state.showPerson;
+    this.setState({showPerson:!doesShow})
+
+  }
+
   render() {
 
       const style={
@@ -52,21 +60,27 @@ class App extends Component {
       <p>This is really working!</p>
       <button 
       style={style}
-      onClick={()=>this.swithNameHandler('Hamsavardini')}>Switch Name</button>
-      <Person
-       name={this.state.person[0].name}
-        age={this.state.person[0].age}/>
+      onClick={this.togglePersonHandler}>Switch Name</button>
+      {
+        this.state.showPerson ?
+      
+        <div>
+          <Person
+             name={this.state.person[0].name}
+              age={this.state.person[0].age}/>
 
-      <Person
-       name={this.state.person[1].name} 
-       age={this.state.person[1].age}
-       click={this.swithNameHandler.bind(this,'Moulesh')}
-       changed={this.nameChangeHandler}>
-       His Hobbies:Playing with akka 
-       </Person>
-      <Person
-       name={this.state.person[2].name} 
-       age={this.state.person[2].age}/>
+          <Person
+              name={this.state.person[1].name} 
+              age={this.state.person[1].age}
+              click={this.swithNameHandler.bind(this,'Moulesh')}
+              changed={this.nameChangeHandler}>
+                    His Hobbies:Playing with akka 
+            </Person>
+          <Person
+                name={this.state.person[2].name} 
+                age={this.state.person[2].age}/>
+          </div>:null
+      }
       </div>
     );
   }
